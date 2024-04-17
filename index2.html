@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #282c34; /* Dark background for better contrast */
+        }
+
+        .calculator {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 8px; /* Rounded corners */
+            border: none;
+            padding: 20px;
+            background-color: #3a3f47; /* Dark shade for calculator background */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow */
+            display: flex;
+            flex-direction: column;
+        }
+
+        #display {
+            width: calc(100% - 20px);
+            height: 50px;
+            margin-bottom: 20px;
+            text-align: right;
+            font-size: 24px;
+            padding: 10px;
+            border-radius: 5px; /* Rounded corners for display */
+            border: 1px solid #555; /* Darker border for better visibility */
+            background-color: #fff; /* White background for contrast */
+            color: #333; /* Dark text for readability */
+        }
+
+        .keys {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .keys button {
+            height: 50px;
+            font-size: 18px;
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+            color: white; /* White text on the buttons */
+            background-color: #61dafb; /* Light blue background for buttons */
+            cursor: pointer; /* Pointer cursor on hover */
+            transition: background-color 0.3s; /* Smooth transition for hover effect */
+        }
+
+        .keys button:hover {
+            background-color: #21a1f1; /* Slightly darker blue on hover */
+        }
+
+        @media (max-width: 600px) {
+            .keys button {
+                font-size: 16px;
+                padding: 10px;
+            }
+            .calculator {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="display" disabled>
+        <div class="keys">
+            <button onclick="appendNumber('1')">1</button>
+            <button onclick="appendNumber('2')">2</button>
+            <button onclick="appendNumber('3')">3</button>
+            <button onclick="appendOperation('+')">+</button>
+            <button onclick="appendNumber('4')">4</button>
+            <button onclick="appendNumber('5')">5</button>
+            <button onclick="appendNumber('6')">6</button>
+            <button onclick="appendOperation('-')">-</button>
+            <button onclick="appendNumber('7')">7</button>
+            <button onclick="appendNumber('8')">8</button>
+            <button onclick="appendNumber('9')">9</button>
+            <button onclick="appendOperation('*')">*</button>
+            <button onclick="appendNumber('0')">0</button>
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="calculateResult()">=</button>
+            <button onclick="appendOperation('/')">/</button>
+        </div>
+    </div>
+    <script>
+        let display = document.getElementById('display');
+
+        function appendNumber(number) {
+            display.value += number;
+        }
+
+        function appendOperation(operation) {
+            display.value += operation;
+        }
+
+        function clearDisplay() {
+            display.value = '';
+        }
+
+        function calculateResult() {
+            try {
+                display.value = eval(display.value);
+            } catch (e) {
+                display.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
